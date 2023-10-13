@@ -7,10 +7,10 @@ import { LayoutProps } from '@/types/LayoutProps';
 import Providers from '@/styles/Providers';
 import { Theme } from '@radix-ui/themes';
 
-if (__DEV__) {  // Adds messages only in a dev environment
-    loadDevMessages();
-    loadErrorMessages();
-}
+// if (__DEV__) {  // Adds messages only in a dev environment
+//     loadDevMessages();
+//     loadErrorMessages();
+// }
 
 export default async function LocaleLayout({
     children,

@@ -1,5 +1,8 @@
 {
-    "homePage":{
-        "test":"阔哥牛逼"
+    "homePage": {
+        "test": "阔哥牛逼"
+    },
+    "home": {
+        "test": "你好"
     }
 }

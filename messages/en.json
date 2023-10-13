@@ -1,5 +1,8 @@
 {
-    "homePage":{
-        "test":"ppk nb"
+    "homePage": {
+        "test": "ppk nb"
+    },
+    "home": {
+        "test": "hello"
     }
 }
