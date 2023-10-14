@@ -1,12 +1,12 @@
 import withPage from "@/hooks/withPage";
 import { Container } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 
 
-
-export default withPage(({ t }) => {
-
+const HomePage = () => {
+    const t = useTranslations("home")
     return (
         <Container>
             {t("test")}1
@@ -15,4 +15,5 @@ export default withPage(({ t }) => {
             </Link>
         </Container>
     )
-}, "home")
+}
+export default HomePage

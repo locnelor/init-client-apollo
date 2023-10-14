@@ -6,29 +6,32 @@ import { __DEV__ } from '@apollo/client/utilities/globals';
 import { LayoutProps } from '@/types/LayoutProps';
 import Providers from '@/styles/Providers';
 import { Theme } from '@radix-ui/themes';
+import Header from './Header';
 
-// if (__DEV__) {  // Adds messages only in a dev environment
-//     loadDevMessages();
-//     loadErrorMessages();
-// }
+if (__DEV__) {  // Adds messages only in a dev environment
+    loadDevMessages();
+    loadErrorMessages();
+}
 
 export default async function LocaleLayout({
     children,
     params: { locale }
 }: LayoutProps) {
     const messages = await getMessages(locale)
+
     return (
         <html lang={locale}>
             <body>
-                <Theme>
-                    <Providers>
-                        <NextIntlClientProvider locale={locale} messages={messages}>
+                <NextIntlClientProvider locale={locale} messages={messages}>
+                    <Theme>
+                        <Providers>
                             <ApolloWrapper>
+                                <Header />
                                 {children}
                             </ApolloWrapper>
-                        </NextIntlClientProvider>
-                    </Providers>
-                </Theme>
+                        </Providers>
+                    </Theme>
+                </NextIntlClientProvider>
             </body>
         </html>
     )

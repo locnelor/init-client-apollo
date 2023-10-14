@@ -2,29 +2,15 @@ import withPage from "@/hooks/withPage";
 import { getQuery } from "@/lib/client";
 import { gql } from "@apollo/client";
 import { Button } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-
-export default withPage(({ t, params: { locale } }) => {
-
+const RootPage = () => {
+    const t = useTranslations("homePage")
     return (
         <div>
-            {t("test")}
-            <Button>
-                button
-            </Button>
-            <div>a</div>
-            <Link href="/zh">
-                zh
-            </Link>
-            <div>a</div>
-            <Link href="/en">
-                en
-            </Link>
-            <div>a</div>
-            <Link href={`/home`}>
-                to home
-            </Link>
+            context
         </div>
     )
-}, "homePage")
+}
+export default RootPage
