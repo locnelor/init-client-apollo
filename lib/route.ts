@@ -1,4 +1,5 @@
-import UserEntity from "@/interfaces/UserEntity";
+import { user } from "@prisma/client";
+
 
 export const getPowers = ([begin, end]: PowerEnum, n: number) => {
     let num = 0;
@@ -84,7 +85,7 @@ export const PowerList = [
     }
 ]
 const hasRule = (power: PowerEnum, callback: (p: number) => boolean) => {
-    return (user: UserEntity) => callback(getPowers(power, user.role))
+    return (user: user) => callback(getPowers(power, user.role))
 }
 
 export const routes = [
@@ -133,7 +134,7 @@ export const routes = [
     {
         name: "文章备份",
         role: hasRule(AccountPower, e => e === 3),
-        path:"/admin/backup"
+        path: "/admin/backup"
     },
     {
         name: "日志管理",
