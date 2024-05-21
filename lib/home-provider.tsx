@@ -17,7 +17,10 @@ const HomeProvider = ({ children }: PropsWithChildren) => {
                         Layout: {
                             headerBg: "#fff",
                             bodyBg: "#fff"
-                        },
+                        }
+                    },
+                    token: {
+                        colorLink: "none"
                     }
                 }}
             >
