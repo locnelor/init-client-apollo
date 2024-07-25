@@ -4,6 +4,7 @@ import { useColumns, useDataSource } from "@/hooks/useTable"
 import useTreeMenu from "@/hooks/useTreeMenu"
 import { sys_menu, sys_user } from "@prisma/client"
 import { Divider, Table } from "antd"
+import { ProgressBarLink } from "./progress-bar"
 
 
 const ClientPage = ({
@@ -28,6 +29,9 @@ const ClientPage = ({
     }])
     return (
         <div>
+            <ProgressBarLink href="/group">
+                toGroup
+            </ProgressBarLink>
             <Divider>权限树</Divider>
             <Table
                 dataSource={tree}

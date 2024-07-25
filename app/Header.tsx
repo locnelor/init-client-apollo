@@ -1,18 +1,34 @@
 "use client"
-import { Avatar, Button, Flex, Layout } from "antd";
-import Link from "next/link";
+import { Avatar, Flex, Layout, Menu, Space } from "antd";
 import UserButton from "./UserButton";
+import { useMemo } from "react";
+import { ProgressBarLink } from "./progress-bar";
 
 
 const Header = () => {
+    const items = useMemo(() => [{
+        href: "/",
+        label: (<Avatar shape="square">Bug</Avatar>)
+    }, {
+        href: "/group",
+        label: "小组",
+    }, {
+        href: "/about",
+        label: "关于"
+    }].map(({ href, label }) => ({
+        key: href,
+        label: (
+            <ProgressBarLink key={href} href={href}>
+                {label}
+            </ProgressBarLink>
+        )
+    })), [])
     return (
         <Layout.Header className="shadow">
             <Flex justify="space-between">
-                <Link href="/">
-                    <Avatar shape="square">
-                        Bug
-                    </Avatar>
-                </Link>
+                <Space>
+                    <Menu items={items} mode="horizontal" />
+                </Space>
                 <Flex>
                     <UserButton />
                 </Flex>

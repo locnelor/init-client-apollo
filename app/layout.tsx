@@ -5,6 +5,7 @@ import "./globals.css";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import HomeLayout from "./HomeLayout";
 import HomeProvider from "@/lib/home-provider";
+import { ProgressBar } from "./progress-bar";
 const __DEV__ = process.env.NODE_ENV !== "production"
 if (__DEV__) {
   loadDevMessages();
@@ -31,7 +32,7 @@ export default function RootLayout({
           <AntdRegistry>
             <HomeProvider>
               <HomeLayout>
-                {children}
+                  {children}
               </HomeLayout>
             </HomeProvider>
           </AntdRegistry>

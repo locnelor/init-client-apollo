@@ -3,10 +3,10 @@ import { setContext } from "@apollo/client/link/context";
 import { cookies } from "next/headers"
 
 import {
-    NextSSRInMemoryCache,
-    NextSSRApolloClient,
-} from "@apollo/experimental-nextjs-app-support/ssr";
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
+    registerApolloClient,
+    ApolloClient,
+    InMemoryCache,
+} from "@apollo/experimental-nextjs-app-support";
 
 export const { getClient } = registerApolloClient(() => {
     const token = cookies().get("token")?.value
@@ -21,8 +21,8 @@ export const { getClient } = registerApolloClient(() => {
     const httpLink = createHttpLink({
         uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`
     })
-    return new NextSSRApolloClient({
-        cache: new NextSSRInMemoryCache(),
+    return new ApolloClient({
+        cache: new InMemoryCache(),
         link: authLink.concat(httpLink),
     });
 });

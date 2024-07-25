@@ -1,13 +1,10 @@
 
-fragment UserFields on UserEntity{
+fragment UserFields on SysUserEntity{
     id
     createAt
     updateAt
-    name
-    role
-    account
     hash_key
-    profile{
-        id
-    }
+    account
+    name
+    
 }
