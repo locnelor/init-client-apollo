@@ -1,17 +1,26 @@
-import prisma from "@/lib/prisma";
-import ClientPage from "./ClientPage";
-import Container from "@/components/Container";
+import { query } from "@/libs/apollo/ApolloClient";
+import { gql } from "@apollo/client";
+import Link from "next/link";
 
+const QUERY = gql`
+  query test($skip: Int!, $take: Int!) {
+    testGetUserList(skip: $skip, take: $take) {
+      skip
+      take
+      total
+      data {
+        id
+        name
+      }
+    }
+  }
+`;
 export default async function Home() {
-  const users = await prisma.sys_user.findMany();
-  const menu = await prisma.sys_menu.findMany();
-  
+  const q = await query({ query: QUERY, variables: { skip: 0, take: 1 } });
   return (
-    <Container>
-      <ClientPage
-        users={users}
-        menuList={menu}
-      />
-    </Container>
+    <div>
+      <Link href="/auth">to auth</Link>
+      <div>{JSON.stringify(q.data)}</div>
+    </div>
   );
 }

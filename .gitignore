@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-pnpm-lock.yarml
 .yarn/install-state.gz
 
 # testing
@@ -28,8 +27,6 @@ yarn-error.log*
 
 # local env files
 .env*.local
-.env
-/prisma
 
 # vercel
 .vercel
@@ -38,3 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 pnpm-lock.yaml
+.env.production
+package-lock.json

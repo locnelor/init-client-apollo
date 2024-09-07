@@ -1,59 +1,52 @@
-"use client"
-import AuthBox from "./AuthBox";
+"use client";
+
+import { gqlError } from "@/libs/apollo-errors";
+import { setCookie } from "@/libs/cookie";
 import { gql, useMutation } from "@apollo/client";
-import { gqlError } from "@/lib/apollo-error";
-import { setCookie } from "@/lib/cookie";
+import { Button, Form, Input } from "antd";
 import { useCallback } from "react";
-import Image from "next/image";
-import { Button, Divider, Flex } from "antd";
 
 const AuthMutation = gql`
-    mutation Auth($account:String!,$password:String!){
-        auth(
-            account:$account,
-            password:$password
-        ){
-            token
-        }
+  mutation Auth($account: String!, $password: String!) {
+    auth(account: $account, password: $password) {
+      token
     }
-`
-const Auth = ({ searchParams: { back = "/" } }) => {
-    const [auth, { loading }] = useMutation(AuthMutation, {
-        onCompleted({ auth: { token } }) {
-            setCookie("token", token);
-            window.location.href = back
-        },
-        onError(error) {
-            gqlError(error)
-        },
-    })
-    const onSubmit = useCallback((variables: any) => {
-        auth({
-            variables
-        })
-    }, []);
-    return (
-        <div>
-            <AuthBox
-                loading={loading}
-                onSubmit={onSubmit}
-            />
-            <Divider>其他登录方式</Divider>
-            <div className="flex gap-3 justify-center mt-5">
-                <div className="cursor-pointer">
-                    <a
-                        href={`/auth/gitee`}
-                    >
-                        <Button block>
-                            <Flex>
-                                <Image width={20} height={20} src="/Logo_gitee_light.svg" alt="gitee" />
-                                gitee快速登录
-                            </Flex>
-                        </Button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    )
-}
-export default Auth
+  }
+`;
+const AuthPage = ({ searchParams: { back = "/" } }) => {
+  const [auth, { loading }] = useMutation(AuthMutation, {
+    onCompleted({ auth: { token } }) {
+      setCookie("token", token);
+      window.location.href = "/";
+    },
+    onError(error) {
+      gqlError(error);
+    },
+  });
+
+  const onFinish = useCallback((variables: any) => {
+    auth({
+      variables,
+    });
+  }, []);
+
+  return (
+    <div>
+      <Form onFinish={onFinish}>
+        <Form.Item required name="account">
+          <Input placeholder="账号" />
+        </Form.Item>
+        <Form.Item required name="password">
+          <Input type="password" placeholder="密码" />
+        </Form.Item>
+        <Form.Item>
+          <Button loading={loading} block htmlType="submit">
+            登陆
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
+
+export default AuthPage;

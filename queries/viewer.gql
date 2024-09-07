@@ -1,7 +1,0 @@
-#import "./fragments/UserFields.gql"
-
-query{
-    viewer{
-        ...UserFields
-    }
-}
