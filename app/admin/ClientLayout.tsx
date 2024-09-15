@@ -30,9 +30,9 @@ const ClientLayout = ({ children }: PropsWithChildren) => {
     router.push(`/admin${key}`);
   }, []);
   const selectedKeys = useMemo(() => {
-    const trimmedPath = pathname.replace(/^\/admin/, '') || '/';
+    const trimmedPath = pathname.replace(/^\/admin/, "") || "/";
     return [trimmedPath];
-  }, [pathname])
+  }, [pathname]);
   return (
     <Layout className="h-full">
       <Layout.Header>
@@ -49,7 +49,11 @@ const ClientLayout = ({ children }: PropsWithChildren) => {
           />
         </Layout.Sider>
         <Layout>
-          <Layout.Content>{children}</Layout.Content>
+          <Layout.Content>
+            <div style={{
+              height:"calc(100vh - 80px)"
+            }} className="p-2 m-2 bg-white overflow-y-auto">{children}</div>
+          </Layout.Content>
         </Layout>
       </Layout>
     </Layout>
