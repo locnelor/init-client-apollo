@@ -1,5 +1,6 @@
 "use client";
 
+import useViewer from "@/hooks/auth/useViewer";
 import { gqlError } from "@/libs/apollo-errors";
 import { setCookie } from "@/libs/cookie";
 import { gql, useMutation } from "@apollo/client";
@@ -10,14 +11,20 @@ const AuthMutation = gql`
   mutation Auth($account: String!, $password: String!) {
     auth(account: $account, password: $password) {
       token
+      role
     }
   }
 `;
 const AuthPage = ({ searchParams: { back = "/" } }) => {
+  useViewer();
   const [auth, { loading }] = useMutation(AuthMutation, {
-    onCompleted({ auth: { token } }) {
+    onCompleted({ auth: { token, role } }) {
       setCookie("token", token);
-      window.location.href = "/";
+      if (role > 100) {
+        window.location.href = "/admin";
+      } else {
+        window.location.href = "/";
+      }
     },
     onError(error) {
       gqlError(error);

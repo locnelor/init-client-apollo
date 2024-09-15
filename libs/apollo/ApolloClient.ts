@@ -1,4 +1,4 @@
-import { HttpLink } from "@apollo/client";
+import { HttpLink, OperationVariables, QueryOptions } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import {
   registerApolloClient,
@@ -24,3 +24,9 @@ export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
     }))
   });
 });
+
+export const getQuery = async (option: QueryOptions<OperationVariables, any>) => {
+  let err;
+  const result = await query(option).catch(e => err = e);
+  return [result, err] as const
+}

@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import { HttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import {
@@ -14,6 +12,7 @@ import { getCookie } from "../cookie";
 function makeClient() {
   const AuthLink = setContext((_, { headers }) => {
     const token = getCookie("token");
+    console.log("token=", token);
     return {
       headers: {
         ...headers,
