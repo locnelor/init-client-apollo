@@ -13,7 +13,11 @@ const AuthMutation = gql`
     }
   }
 `;
-const AuthPage = ({ searchParams: { back = "/" } }) => {
+type AuthVariables = {
+  account: string;
+  password: string;
+};
+const AuthPage = () => {
   const [auth, { loading }] = useMutation(AuthMutation, {
     onCompleted({ auth: { token } }) {
       setCookie("token", token);
@@ -24,11 +28,14 @@ const AuthPage = ({ searchParams: { back = "/" } }) => {
     },
   });
 
-  const onFinish = useCallback((variables: any) => {
-    auth({
-      variables,
-    });
-  }, []);
+  const onFinish = useCallback(
+    (variables: AuthVariables) => {
+      auth({
+        variables,
+      });
+    },
+    [auth]
+  );
 
   return (
     <div>
