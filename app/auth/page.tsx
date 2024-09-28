@@ -41,10 +41,10 @@ const AuthPage = () => {
     <div>
       <Form onFinish={onFinish}>
         <Form.Item required name="account">
-          <Input placeholder="账号" />
+          <Input placeholder="账号" style={{ backgroundColor: "#f0f0f0", borderColor: "#d9d9d9" }} />
         </Form.Item>
         <Form.Item required name="password">
-          <Input type="password" placeholder="密码" />
+          <Input type="password" placeholder="密码" style={{ backgroundColor: "#f0f0f0", borderColor: "#d9d9d9" }} />
         </Form.Item>
         <Form.Item>
           <Button loading={loading} block htmlType="submit">

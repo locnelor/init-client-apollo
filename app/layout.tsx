@@ -4,7 +4,7 @@ import "./globals.css";
 import { ApolloWrapper } from "@/libs/apollo/ApolloWrapper";
 import AppLayout from "./AppLayout";
 import "@radix-ui/themes/styles.css";
-// import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "next-themes";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -31,11 +31,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <ThemeProvider attribute="class"> */}
-        <ApolloWrapper>
-          <AppLayout>{children}</AppLayout>
-        </ApolloWrapper>
-        {/* </ThemeProvider> */}
+        <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+        <ThemeProvider attribute="class">
+          <ApolloWrapper>
+            <AppLayout>{children}</AppLayout>
+          </ApolloWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

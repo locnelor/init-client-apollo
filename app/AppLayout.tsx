@@ -1,19 +1,16 @@
 "use client";
+import { Theme } from "@radix-ui/themes";
 import Link from "next/link";
 import {
   PropsWithChildren,
+  ReactNode,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from "react";
-import HomeCard from "./HomeCard";
 
-type HeaderMenuItem = {
-  title: string;
-  href: string;
-};
-const HeaderItem = ({ title, href }: HeaderMenuItem) => {
+const HeaderItem = ({ children }: PropsWithChildren) => {
   const [width, setWidth] = useState(0);
   const [left, setLeft] = useState(50);
 
@@ -33,9 +30,7 @@ const HeaderItem = ({ title, href }: HeaderMenuItem) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Link href={href}>
-        <div className="text-current">{title}</div>
-      </Link>
+      <div className="text-current">{children}</div>
       <div
         className="bg-current duration-300 absolute top-full"
         style={{
@@ -48,22 +43,22 @@ const HeaderItem = ({ title, href }: HeaderMenuItem) => {
   );
 };
 const AppHeader = () => {
-  const menus: HeaderMenuItem[] = useMemo(() => {
+  const menus = useMemo(() => {
     return [
+      {
+        title: "Logo",
+        href: "/",
+      },
       {
         title: "BUG",
         href: "/bug", //这里是一堆bug
       },
       {
-        title: "窝子", //
-        href: "/sub",
+        title: "窝子", //这里是窝子们
+        href: "/den",
       },
       {
-        title: "归档",
-        href: "/archive",
-      },
-      {
-        title: "友链",
+        title: "友链", //阔哥牛逼友情链接
         href: "/link",
       },
     ];
@@ -89,18 +84,18 @@ const AppHeader = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full shadow-md z-20 transition-colors duration-300`}
-      style={{
-        background: isScrolled ? "#040d19" : "",
-      }}
+      className={`fixed top-0 bg-base left-0 w-full z-20 transition-colors duration-300 ${
+        isScrolled ? "shadow" : "shadow-none"
+      }`}
     >
       <div className="container mx-auto px-4 py-3">
         <nav className="flex items-center justify-between">
-          <HeaderItem title="Bug窝子" href="/" />
           <ul className="flex space-x-6">
             {menus.map(({ title, href }) => (
               <li key={href}>
-                <HeaderItem title={title} href={href} />
+                <Link href={href}>
+                  <HeaderItem>{title}</HeaderItem>
+                </Link>
               </li>
             ))}
           </ul>
@@ -111,16 +106,17 @@ const AppHeader = () => {
 };
 
 const AppFooter = () => {
-  return <div className="relative z-10"></div>;
+  return <div className="mt-10 container mx-auto">footer</div>;
 };
 const AppLayout = ({ children }: PropsWithChildren) => {
   return (
-    <div>
-      <AppHeader />
-      <HomeCard />
-      <div className="container mx-auto z-10 relative">{children}</div>
-      <AppFooter />
-    </div>
+    <Theme appearance="inherit">
+      <div>
+        <AppHeader />
+        <div className="container mx-auto">{children}</div>
+        <AppFooter />
+      </div>
+    </Theme>
   );
 };
 export default AppLayout;

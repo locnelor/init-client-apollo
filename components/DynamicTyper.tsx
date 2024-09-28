@@ -53,28 +53,15 @@ export const useTyper = (texts: string[]) => {
 };
 const DynamicTyper = () => {
   const items: TextItem[] = useMemo(() => {
-    return [
-      {
-        author: "阔哥",
-        text: "俩圆盘中间一个棍你扛起来那个",
-      },
-      {
-        author: "豪哥",
-        text: "因为我好断章取义啊",
-      },
-      {
-        author: "阔哥",
-        text: "我还扣过耳屎呢那叫一个酸啊",
-      },
-      {
-        author: "阔哥",
-        text: "我那他们当妈又没有当对象",
-      },
-      {
-        author: "博哥",
-        text: "我想去道馆",
-      },
-    ];
+    return new Array(10).fill(0).map(() => {
+      return {
+        author: "asd",
+        text: new Array(Math.floor(Math.random() * 100) + 1)
+          .fill("")
+          .map(() => Math.floor(Math.random() * 16).toString(16))
+          .join(""),
+      };
+    });
   }, []);
   const texts = useMemo(
     () => items.map((e) => `来自:${e.author}\n${e.text}`),

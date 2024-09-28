@@ -6,9 +6,13 @@
   margin: 0;
   padding: 0;
 }
-html,
-body {
-  width: 100%;
-  background-color: #040d19;
-  color: #fff;
+
+.light {
+  --color-base: theme("colors.white");
+  --color-text-base: theme("colors.black");
+}
+
+.dark {
+  --color-base: theme("colors.gray.900");
+  --color-text-base: theme("colors.gray.100");
 }
