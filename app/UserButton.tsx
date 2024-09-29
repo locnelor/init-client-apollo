@@ -1,17 +1,16 @@
 "use client";
 
 import useViewer from "@/hooks/useViewer";
-import { Avatar } from "antd";
+import { Avatar } from "@radix-ui/themes";
 import Link from "next/link";
 
 const UserButton = () => {
   const { user } = useViewer();
-  console.log(user)
   return (
     <div>
       {user ? (
         <>
-          <Avatar src="/path/to/avatar.png" alt="avatar" />
+          <Avatar src="/path/to/avatar.png" fallback={"icon"} />
           <span>{user.name}</span>
         </>
       ) : (

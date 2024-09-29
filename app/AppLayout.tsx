@@ -9,6 +9,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import UserButton from "./UserButton";
 
 const HeaderItem = ({ children }: PropsWithChildren) => {
   const [width, setWidth] = useState(0);
@@ -99,6 +100,7 @@ const AppHeader = () => {
               </li>
             ))}
           </ul>
+          <UserButton />
         </nav>
       </div>
     </header>
